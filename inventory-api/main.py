@@ -22,12 +22,12 @@ inventory = {}
 
 
 @app.get("/")
-def intro():
+async def intro():
    return {"message": "Please head over to the '/docs'"}
 
 
 @app.post("/create-item/{item_id}")
-def create_item(item_id: int, item: Item):
+async def create_item(item_id: int, item: Item):
    if item_id in inventory:
       return {"Error": "Item ID already exist"}
    
@@ -36,7 +36,7 @@ def create_item(item_id: int, item: Item):
 
 
 @app.get("/get-by-id/{item_id}")
-def get_item(item_id: int):
+async def get_item(item_id: int):
    if item_id not in inventory:
       return {"Error": "No item which such item ID"}
    
@@ -44,7 +44,7 @@ def get_item(item_id: int):
 
 
 @app.get("/get-by-name")
-def get_item(name: str):
+async def get_item(name: str):
    for item_id in inventory:
       if inventory[item_id].name == name:
          return inventory[item_id]
@@ -53,7 +53,7 @@ def get_item(name: str):
    
 
 @app.put("/update-item/{item_id}")
-def update_item(item_id: int, item: UpdateItem):
+async def update_item(item_id: int, item: UpdateItem):
    if item_id not in inventory:
       return {"Error": "ID not found"}
    
@@ -70,7 +70,7 @@ def update_item(item_id: int, item: UpdateItem):
 
 
 @app.delete("/delete-item/{item_id}")
-def delete_item(item_id: int):
+async def delete_item(item_id: int):
    if item_id not in inventory:
       return {"Error": "No data found with such ID"}
    
