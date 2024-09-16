@@ -12,6 +12,11 @@ load_dotenv()
 API_KEY = os.getenv("WEATHER_API_KEY")
 
 
+@app.get("/")
+def intro():
+   return {"message": "Please head over to the '/docs'"}
+
+
 @app.get("/weather/{city}")
 def weather_info(city: str):
    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
