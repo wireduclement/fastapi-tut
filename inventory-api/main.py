@@ -21,6 +21,11 @@ class UpdateItem(BaseModel):
 inventory = {}
 
 
+@app.get("/")
+def intro():
+   return {"message": "Please head over to the '/docs'"}
+
+
 @app.post("/create-item/{item_id}")
 def create_item(item_id: int, item: Item):
    if item_id in inventory:
