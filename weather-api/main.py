@@ -1,7 +1,7 @@
 import os
 import requests
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
 
 
@@ -31,7 +31,7 @@ async def weather_info(city: str):
          "Description": data["weather"][0]["description"]
       }
    else:
-      return {"Error": "No city found"}
+      raise HTTPException(status_code=404, detail="No city found")
    
 
 if __name__ == "__main__":
